@@ -221,11 +221,11 @@ this.handleBlockException(request, response, e);
 
 虽然上面这种硬编码规则的方式可以使用，但是在实际的项目中，肯定希望能够基于系统当期那运行的状态来动态调整规则，所以Sentinel提供了一个叫Dashboard应用的控制台，可以通过控制台来动态修改规则。
 
-![](D:\Sentinel\img\ef62f16b42064d938286ec154fd9187d_noop.jpg)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/ef62f16b42064d938286ec154fd9187d_noop.jpg)
 
 控制台其实就是一个jar包，可以从Sentinel的github仓库上下载，或者是通过从下面这个地址获取。
 
-链接：https://pan.baidu.com/s/1Lw8V5ab_FUq934nLWDjfaw 提取码：obr5
+链接: https://pan.baidu.com/s/1IFWcpqDunqHlRukZDd-cgw 提取码: inw4 
 
 之后通过java -jar命令启动就可以了，端口默认8080，浏览器访问http://ip:8080/#/login就可以登录控制台了，用户名和密码默认都是sentinel。
 
