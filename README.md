@@ -242,7 +242,7 @@ spring:
 
 项目刚启动的时候控制台默认是没有数据的，需要访问一下接口，之后就有了。
 
-![](D:\Sentinel\img\cdaa506498dd481ab5b93e621070c728_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/cdaa506498dd481ab5b93e621070c728_noop.png)
 
 之后就可以看到/sayHello这个资源，后面就可以通过页面设置规则。
 
@@ -256,7 +256,7 @@ SphU.entry(..)这行代码背后就会调用责任链来完成对资源的检查
 
 这个责任链条中每个处理节点被称为ProcessorSlot，中文意思就是处理器槽
 
-![](D:\Sentinel\img\18199c3aa61f402ba51b03af5a02f1d8_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/18199c3aa61f402ba51b03af5a02f1d8_noop.png)
 
 这个ProcessorSlot有很多实现，但是Sentinel的核心就下面这8个：
 
@@ -273,7 +273,7 @@ SphU.entry(..)这行代码背后就会调用责任链来完成对资源的检查
 
 默认情况下，节点是按照如下的顺序进行排序的
 
-![](D:\Sentinel\img\7d58c2b10fd24724a901acba309fab5e_noop.jpg)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/7d58c2b10fd24724a901acba309fab5e_noop.jpg)
 
 虽然默认就8个，但是如果你想扩展，只要实现ProcessorSlot，按照SPI的规定配置一下就行。
 
@@ -291,7 +291,7 @@ SphU.entry(..)这行代码背后就会调用责任链来完成对资源的检查
 
 当然是需要进行数据统计的，只有通过统计，才知道qps是否达到2，这个进行数据统计的类在Sentinel中叫做Node。
 
-![](D:\Sentinel\img\2d96c5e59aa940c0bd657d41a5b38feb_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/2d96c5e59aa940c0bd657d41a5b38feb_noop.png)
 
 通过Node这个统计的类就知道有多少请求，成功多少个，失败多少个，qps是多少之类的。底层其实是使用到了滑动窗口算法。
 
@@ -303,7 +303,7 @@ SphU.entry(..)这行代码背后就会调用责任链来完成对资源的检查
 
 假设把杭州看做是服务，西湖看做是一个资源，到达西湖有两种方式，地铁和公交。
 
-![](D:\Sentinel\img\19ca5f72e9964204a0de2ef74cc3728d_noop.jpg)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/19ca5f72e9964204a0de2ef74cc3728d_noop.jpg)
 
 所以要想访问西湖这个资源，就可以通过公交和地铁两种方式，而公交和地铁就对应前面说的入口的意思。
 
@@ -315,11 +315,11 @@ SphU.entry(..)这行代码背后就会调用责任链来完成对资源的检查
 
 在SpringMVC环境底下，所有的http接口资源，默认的入口都是sentinel_spring_web_context
 
-![](D:\Sentinel\img\500961c8e20c4dfda7eb7c101d332e33_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/500961c8e20c4dfda7eb7c101d332e33_noop.png)
 
 入口名称也可以通过控制台看到
 
-![](D:\Sentinel\img\c1c6e4100f3847cc9af52bf4c16994be_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/c1c6e4100f3847cc9af52bf4c16994be_noop.png)
 
 那么为什么要搞一个入口的概念呢？这里咱先留个悬念，后面再说。
 
@@ -348,7 +348,7 @@ ClusterBuilderSlot会选择两个统计Node：
 
 当资源所在的服务接收到请求时，Sentinel就会从S-user请求头获取到服务名，之后再通过ContextUtil.enter("入口名", "调用者名")来设置当前资源的调用者
 
-![](D:\Sentinel\img\f53cbc40f351462bbd464286b52e1e89_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/f53cbc40f351462bbd464286b52e1e89_noop.png)
 
 这里我原以为Sentinel会适配比如OpenFeign之类的框架，会自动将服务名携带到请求头中，但是我翻了一下源码，发现并没有去适配，不知道是出于什么情况的考虑。
 
@@ -366,13 +366,13 @@ ClusterBuilderSlot会选择两个统计Node：
 
 那么他们的关系就可以用下面这个图来表示
 
-![](D:\Sentinel\img\2ab34a357fb9400687edafda6918941b_noop.jpg)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/2ab34a357fb9400687edafda6918941b_noop.jpg)
 
 # LogSlot
 
 这个Slot没什么好说的，通过名字可以看出来，其实就是用来打印日志的。
 
-![](D:\Sentinel\img\3343d14775784de7b6c7fd2ee49f2327_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/3343d14775784de7b6c7fd2ee49f2327_noop.png)
 
 当发生异常，就会打印日志。
 
@@ -384,7 +384,7 @@ ClusterBuilderSlot会选择两个统计Node：
 
 而StatisticSlot就是对这些统计Node进行实际的统计，比如加一下资源的访问线程数，资源的请求数量等等。
 
-![](D:\Sentinel\img\f650768dba724e108a42670a6f4dfe18_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/f650768dba724e108a42670a6f4dfe18_noop.png)
 
 前几个Slot其实都是准备、统计的作用，并没有涉及限流降级之类的，他们是为限流降级提供数据支持的。
 
@@ -394,7 +394,7 @@ Authority是授权的意思，这个Slot的作用是对资源调用者进行授�
 
 可以通过控制台来添加授权规则。
 
-![](D:\Sentinel\img\d9da08e281de43e9b785718072b92218_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/d9da08e281de43e9b785718072b92218_noop.png)
 
 在AuthoritySlot中会去获取资源的调用者，之后会跟授权规则中的资源应用这个选项进行匹配，之后就会出现有以下2种情况：
 
@@ -407,11 +407,11 @@ Authority是授权的意思，这个Slot的作用是对资源调用者进行授�
 
 它支持入口qps、线程数、响应时间、cpu使用率、负载5个限流的维度。
 
-![](D:\Sentinel\img\67c04692712c42bbbfc09e8846d76ee8_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/67c04692712c42bbbfc09e8846d76ee8_noop.png)
 
 对于系统的入口qps、线程数、平均响应时间这些指标，也会有一个统计Node专门去统计，所以这个统计Node的作用就好比会去统计所有访问西湖的人数，统计也在StatisticSlot代码中，前面说的时候我把代码隐藏了
 
-![](D:\Sentinel\img\c2e6cbd0c5cf4658a5f3b9ca485363c8_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/c2e6cbd0c5cf4658a5f3b9ca485363c8_noop.png)
 
 至于cpu使用率、负载指标，Sentinel会启动一个定时任务，每隔1s会去读取一次当前系统的cpu和负载。
 
@@ -421,7 +421,7 @@ Authority是授权的意思，这个Slot的作用是对资源调用者进行授�
 
 在说FlowSlot之前，先来用之前画的那张图回顾一下一个资源的三种统计维度
 
-![](D:\Sentinel\img\56f96b7dcd804211a022f83b2b251eda_noop.jpg)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/56f96b7dcd804211a022f83b2b251eda_noop.jpg)
 
 这里默默地注视10s。。
 
@@ -429,7 +429,7 @@ Authority是授权的意思，这个Slot的作用是对资源调用者进行授�
 
 
 
-![](D:\Sentinel\img\8420abc75eec4b2f9e0feb2da43cc08d_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/8420abc75eec4b2f9e0feb2da43cc08d_noop.png)
 
 这里我们来好好扒一扒这些配置项的意思。
 
@@ -451,7 +451,7 @@ Authority是授权的意思，这个Slot的作用是对资源调用者进行授�
 
 关联模式下需要填写关联的资源名称
 
-![](D:\Sentinel\img\b2959be33abb40e596b577f437d12f52_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/b2959be33abb40e596b577f437d12f52_noop.png)
 
 关联的意思就是当**关联资源**的ClusterNode统计的qps达到了设置的阈值时，就会触发**当前资源**的限流操作。
 
@@ -459,7 +459,7 @@ Authority是授权的意思，这个Slot的作用是对资源调用者进行授�
 
 链路模式也一样，它需要关联一个入口资源
 
-![](D:\Sentinel\img\08e47f542d774529897426e34d44212e_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/08e47f542d774529897426e34d44212e_noop.png)
 
 关联入口的意思就是指，当访问资源的实际入口跟关联入口是一样的时候，就会根据这个入口对应的DefaultNode的统计数据来判断是否需要限流。
 
@@ -483,11 +483,11 @@ Warm Up的作用就是为了防止系统流量突然增加时出现瞬间把系�
 
 Sentinel支持三种熔断策略：慢调用比例、异常比例 、异常数，通过规则配置也可以看出来。
 
-![](D:\Sentinel\img\1524616e6bf8405199f0c320434045d9_noop.png)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/1524616e6bf8405199f0c320434045d9_noop.png)
 
 熔断器的工作流程大致如下
 
-![](D:\Sentinel\img\8baedda9cffd4066ba74dfcccdc1da78_noop.jpg)
+![](https://raw.githubusercontent.com/yuluofengchuiqu/Sentinel/main/img/8baedda9cffd4066ba74dfcccdc1da78_noop.jpg)
 
 Sentinel会为每个设置的规则都创建一个熔断器，熔断器有三种状态，OPEN(打开)、HALF_OPEN(半开)、CLOSED(关闭)
 
